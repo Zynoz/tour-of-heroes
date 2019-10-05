@@ -1,33 +1,35 @@
 import { Injectable } from '@angular/core';
 import { User } from './user';
 import { HttpClient } from '@angular/common/http';
-import {connectableObservableDescriptor} from 'rxjs/internal/observable/ConnectableObservable';
-import {parseJsonSchemaToOptions} from '@angular/cli/utilities/json-schema';
+import { Observable} from 'rxjs';
+import { UserInterface} from './user.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  apiURL = 'localhost:8080/api/v1/manager/';
+  apiURL = 'http://localhost:8080/api/v1/manager/';
 
   constructor(private httpClient: HttpClient) {}
 
-  // public createuser(user: User) {}
-
-  // public updateuser(user: User) {}
-
-  // public deleteuser(id: number) {}
-
-  public getUserById(id: number) {
-    const user = this.httpClient.get<User>(`${this.apiURL}/getUserById/${id}`);
-    console.log(user);
-    return user;
+  getUsers(): Observable<UserInterface[]> {
+    return this.httpClient.get<UserInterface[]>(`${this.apiURL}/getAllUsers`);
   }
 
-  public getusers() {
-    const users = this.httpClient.get<User[]>(`${this.apiURL}/getAllUsers`);
-    console.log(users);
-    return users;
+  getUser(id: string): Observable<UserInterface> {
+    return this.httpClient.get<UserInterface>(`${this.apiURL}/getUserById/{id}`);
+  }
+
+  createUser(name: string): Observable<UserInterface> {
+    return this.httpClient.post<UserInterface>(`${this.apiURL}/createUser/`, name, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+  }
+
+  deleteUser(id: string): Observable<UserInterface> {
+    return this.httpClient.delete<UserInterface>(`${this.apiURL}/deleteUser/${id}`);
   }
 }

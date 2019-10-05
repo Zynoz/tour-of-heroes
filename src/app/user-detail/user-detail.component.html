@@ -5,11 +5,11 @@
       <input [(ngModel)]="user.name" placeholder="name"/>
     </label>
   </div>
-  <div><span>current TID: </span>{{user.transactionId}}</div>
-  <div *ngIf="user.sqlList.length">
-    <label>SQL Statements for {{user.transactionId}}:</label>
+  <div><span>current TID: </span>{{user.currentTransaction}}</div>
+  <div *ngIf="user.transactionList.length">
+    <label>SQL Statements for {{user.currentTransaction}}:</label>
     <ul class="transaction">
-      <li *ngFor="let sql of user.sqlList">
+      <li *ngFor="let sql of user.transactionList">
         {{sql}}
       </li>
     </ul>
