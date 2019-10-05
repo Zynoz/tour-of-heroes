@@ -1,0 +1,17 @@
+<div *ngIf="user">
+  <h2>{{user.name | uppercase}} Details:</h2>
+  <div>
+    <label>Username:
+      <input [(ngModel)]="user.name" placeholder="name"/>
+    </label>
+  </div>
+  <div><span>current TID: </span>{{user.transactionId}}</div>
+  <div *ngIf="user.sqlList.length">
+    <label>SQL Statements for {{user.transactionId}}:</label>
+    <ul class="transaction">
+      <li *ngFor="let sql of user.sqlList">
+        {{sql}}
+      </li>
+    </ul>
+  </div>
+</div>
