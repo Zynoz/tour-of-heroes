@@ -8,6 +8,8 @@ import { UserService } from './user.service';
 })
 export class AppComponent {
   title = 'User List';
+  headers = ['Transaction', 'Locking', 'Index', 'Memory', 'Redo|Undo'];
+  transaction: any;
 
   constructor(private userService: UserService) {
   }

@@ -32,4 +32,12 @@ export class UserService {
   deleteUser(id: string): Observable<UserInterface> {
     return this.httpClient.delete<UserInterface>(`${this.apiURL}/deleteUser/${id}`);
   }
+
+  // executeSql(userId: string, sql: string): Observable<UserInterface> {
+  //   return this.httpClient.put<UserInterface>(`${this.apiURL}/execute/`, userId, '/', sql, {
+  //     headers: {
+  //       'Content-Type': 'application/json'
+  //     }
+  //   });
+  // }
 }
